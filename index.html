@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/SplitText.min.js"></script>
         <script>
         tailwind.config = {
             theme: {
@@ -237,72 +236,120 @@
         </div>
     </nav>
 <script>
+        // Custom text splitting function (replaces SplitText plugin)
+        function splitTextIntoChars(element) {
+            const text = element.textContent;
+            element.textContent = '';
+            
+            const chars = text.split('').map(char => {
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? '\u00A0' : char; // Preserve spaces
+                span.style.display = 'inline-block';
+                span.style.opacity = '0';
+                span.style.transform = 'translateY(30px)';
+                element.appendChild(span);
+                return span;
+            });
+            
+            return chars;
+        }
+
         // GSAP Animations 
         document.addEventListener('DOMContentLoaded', () => {
-            gsap.registerPlugin(ScrollTrigger, SplitText);
+            // Check if GSAP is loaded
+            if (typeof gsap === 'undefined') {
+                console.error('GSAP is not loaded!');
+                return;
+            }
+
+            gsap.registerPlugin(ScrollTrigger);
 
             // Hero section animations
-            const heroTitle = document.querySelector('#hero');
+            const heroTitle = document.querySelector('.hero-title');
             const heroSubtitle = document.querySelector('.hero-subtitle');
             const heroButtons = document.querySelectorAll('.hero-buttons a');
 
-            // Hero title animation with SplitText
-            const heroTitle = document.querySelector('#hero');
+            console.log('Elements found:', { heroTitle, heroSubtitle, heroButtons });
+
+            // Set initial states
+            gsap.set(heroSubtitle, { opacity: 0, y: 30 });
+            gsap.set(heroButtons, { opacity: 0, y: 30 });
+
+            // Hero title animation with custom text splitting
             if (heroTitle) {
-                const splitTitle = new SplitText(heroTitle, {
-                    type: "chars,words,lines",
-                    linesClass: "split-line",
-                    wordsClass: "split-word",
-                    charsClass: "split-char"
-                });
+                try {
+                    // Split the text into individual characters
+                    const titleChars = splitTextIntoChars(heroTitle);
+                    console.log('Split title into', titleChars.length, 'characters');
 
-                gsap.set(splitTitle.chars, {
-                    opacity: 0,
-                    y: 30
-                });
+                    // Create the animation timeline
+                    const titleTimeline = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: heroTitle,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    });
 
-                gsap.to(splitTitle.chars, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    stagger: 0.05,
-                    ease: "back.out(1.7)",
-                    scrollTrigger: {
-                        trigger: heroTitle,
-                        start: "top 80%",
-                        toggleActions: "play none none none"
+                    titleTimeline.to(titleChars, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        stagger: 0.05,
+                        ease: "back.out(1.7)"
+                    });
+
+                    // Also trigger on page load if hero is visible
+                    if (window.scrollY < 100) {
+                        titleTimeline.play();
                     }
-                });
+                } catch (error) {
+                    console.error('Text splitting error:', error);
+                }
             }
 
             // Subtitle animation
-            gsap.from(heroSubtitle, {
-                duration: 1,
-                opacity: 0,
-                y: 30,
-                delay: 0.5,
-                ease: "power3.out",
+            const subtitleTimeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: heroSubtitle,
                     start: "top 80%",
-                    toggleActions: "play none none none"
+                    toggleActions: "play none none reverse"
                 }
             });
 
+            subtitleTimeline.to(heroSubtitle, {
+                duration: 1,
+                opacity: 1,
+                y: 0,
+                delay: 0.5,
+                ease: "power3.out"
+            });
+
             // Buttons animation
-            gsap.to(heroButtons, {
+            const buttonsTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroButtons,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            buttonsTimeline.to(heroButtons, {
                 duration: 0.8,
                 y: 0,
                 opacity: 1,
                 stagger: 0.1,
                 delay: 0.8,
-                ease: "back.out(1.7)",
-                scrollTrigger: {
-                    trigger: heroButtons,
-                    start: "top 80%",
-                    toggleActions: "play none none none"
-                }
+                ease: "back.out(1.7)"
             });
+
+            // Trigger animations on page load if hero is visible
+            if (window.scrollY < 100) {
+                setTimeout(() => {
+                    subtitleTimeline.play();
+                    buttonsTimeline.play();
+                }, 100);
+            }
 
             // Background parallax effect
             gsap.to('.hero-bg', {
@@ -315,19 +362,31 @@
                 backgroundPosition: "50% 30%",
                 ease: "none"
             });
+
+            // Force refresh ScrollTrigger after all animations are set up
+            ScrollTrigger.refresh();
+
+            // Simple test animation to verify GSAP is working
+            gsap.to('body', {
+                duration: 0.1,
+                opacity: 1,
+                onComplete: () => {
+                    console.log('GSAP is working!');
+                }
+            });
         });
     </script>
 
     <!-- Hero Section -->
     <section class="hero-bg text-white py-20 md:py-32 overflow-hidden">
         <div class="container mx-auto px-4 text-center">
-            <h1 id="hero" class="text-4xl md:text-6xl font-bold mb-6 hero-title overflow-hidden">
-                <span class="inline-block">WELCOME TO HGEC EDUCATIONAL CONSULTANCY LTD.</span>
+            <h1 id="hero" class="text-4xl md:text-6xl font-bold mb-6 overflow-hidden">
+                <span class="hero-title inline-block">WELCOME TO HGEC EDUCATIONAL CONSULTANCY LTD.</span>
             </h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto hero-subtitle">Bridging the gap between students and their international education dreams</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4 hero-buttons">
-                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform translate-y-10 opacity-0">Apply Now</a>
-                <a href="#" class="bg-white hover:bg-gray-100 text-blue-800 px-6 py-3 rounded-lg font-medium transition duration-300 transform translate-y-10 opacity-0">Our Services</a>
+                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Apply Now</a>
+                <a href="#" class="bg-white hover:bg-gray-100 text-blue-800 px-6 py-3 rounded-lg font-medium transition duration-300">Our Services</a>
             </div>
         </div>
     </section>
@@ -711,7 +770,7 @@
             
             <div class="max-w-4xl mx-auto bg-gray-100 rounded-xl overflow-hidden shadow-lg">
                 <div class="aspect-w-16 aspect-h-9">
-                    <iframe class="w-full h-96" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="w-full h-96" src="https://www.youtube.com/embed/YpluYqoau_M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-blue-800 mb-2">Got My Admission and Visa Through HGEC</h3>
