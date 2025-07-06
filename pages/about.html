@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - HGEC Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0a3d62',
+                        secondary: '#1e90ff',
+                        accent: '#f5f5f5'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(10, 61, 98, 0.8), rgba(10, 61, 98, 0.9)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .destination-card {
+            transition: all 0.3s ease;
+        }
+        
+        .destination-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .floating-btn {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .map-marker {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .map-marker::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #1e90ff;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .map-marker:hover::after {
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Top Contact Bar -->
+    <div class="bg-primary text-white py-2 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-4 mb-2 md:mb-0">
+                <a href="tel:+2348027116388" class="hover:text-secondary transition">
+                    <i class="fas fa-phone-alt mr-1"></i> +2348027116388
+                </a>
+                <a href="mailto:info@hgectravel.com" class="hover:text-secondary transition">
+                    <i class="fas fa-envelope mr-1"></i> info@hgectravel.com
+                </a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://www.facebook.com/" target="_blank" class="hover:text-secondary transition">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/Hgeclimited?t=mAcb72SpQtpiNPziMJVsMQ&s=08" target="_blank" class="hover:text-secondary transition">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.youtube.com/@hgeceducationalconsultancyltd" target="_blank" class="hover:text-secondary transition">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://instagram.com/hgectravel" target="_blank" class="hover:text-secondary transition">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="https://hgectravel.com/" class="flex items-center">
+                    <img src="https://hgectravel.com/wp-content/uploads/2023/04/cropped-LOGO4.jpg" alt="HGEC Travel Logo" class="h-12">
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/index.html" class="text-gray-700 hover:text-secondary font-medium transition map-marker">Home</a>
+                    <a href="/pages/about.html" class="text-secondary font-medium map-marker">About</a>
+                    
+                    <!-- Services Dropdown -->
+                    <div class="dropdown relative">
+                        <button class="text-gray-700 hover:text-secondary font-medium flex items-center transition">
+                            Services <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-64 z-50">
+                            <a href="https://hgectravel.com/admission-processing/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Admission Processing</a>
+                            <a href="https://hgectravel.com/visa-processing/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Visa Processing</a>
+                            <a href="https://hgectravel.com/online-payment-assistance/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Online Payment Assistance</a>
+                            <a href="https://hgectravel.com/accommodation-reservation/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Accommodation Reservation</a>
+                            <a href="https://hgectravel.com/airport-pickup/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Airport Pickup</a>
+                            <a href="https://hgectravel.com/travel-arrangement/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Travel Arrangement</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Study Destination Dropdown -->
+                    <div class="dropdown relative">
+                        <button class="text-gray-700 hover:text-secondary font-medium flex items-center transition">
+                            Study Destination <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-lg rounded-md mt-2 py-2 w-64 z-50">
+                            <a href="https://hgectravel.com/study-in-u-s-a/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in U.S.A</a>
+                            <a href="https://hgectravel.com/study-in-u-k/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in U.K</a>
+                            <a href="https://hgectravel.com/study-in-canada/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in Canada</a>
+                            <a href="https://hgectravel.com/study-in-germany/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in Germany</a>
+                            <a href="https://hgectravel.com/study-in-finland/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in Finland</a>
+                            <a href="https://hgectravel.com/study-in-sweeden/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in Sweden</a>
+                            <a href="https://hgectravel.com/study-in-australia/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in Australia</a>
+                            <a href="https://hgectravel.com/study-in-france/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in France</a>
+                            <a href="https://hgectravel.com/study-in-netherlands/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in Netherlands</a>
+                            <a href="https://hgectravel.com/study-in-cyprus/" class="block px-4 py-2 hover:bg-accent hover:text-secondary">Study in Cyprus</a>
+                        </div>
+                    </div>
+                    
+                    <a href="https://hgectravel.com/contact/" class="text-gray-700 hover:text-secondary font-medium transition map-marker">Contact</a>
+                    <a href="https://hgectravel.com/apply-now/" class="bg-secondary text-white px-6 py-2 rounded-full font-medium hover:bg-primary transition">Apply Now</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-4 absolute w-full z-50 shadow-lg">
+            <a href="/index.html" class="block py-2 px-4 hover:bg-accent">Home</a>
+            <a href="/pages/about.html" class="block py-2 px-4 bg-accent text-secondary">About</a>
+            <div class="py-2 px-4">
+                <div class="font-medium mb-2">Services</div>
+                <div class="pl-4">
+                    <a href="https://hgectravel.com/admission-processing/" class="block py-2 hover:text-secondary">Admission Processing</a>
+                    <a href="https://hgectravel.com/visa-processing/" class="block py-2 hover:text-secondary">Visa Processing</a>
+                    <a href="https://hgectravel.com/online-payment-assistance/" class="block py-2 hover:text-secondary">Online Payment Assistance</a>
+                    <a href="https://hgectravel.com/accommodation-reservation/" class="block py-2 hover:text-secondary">Accommodation Reservation</a>
+                    <a href="https://hgectravel.com/airport-pickup/" class="block py-2 hover:text-secondary">Airport Pickup</a>
+                    <a href="https://hgectravel.com/travel-arrangement/" class="block py-2 hover:text-secondary">Travel Arrangement</a>
+                </div>
+            </div>
+            <div class="py-2 px-4">
+                <div class="font-medium mb-2">Study Destination</div>
+                <div class="pl-4">
+                    <a href="https://hgectravel.com/study-in-u-s-a/" class="block py-2 hover:text-secondary">Study in U.S.A</a>
+                    <a href="https://hgectravel.com/study-in-u-k/" class="block py-2 hover:text-secondary">Study in U.K</a>
+                    <a href="https://hgectravel.com/study-in-canada/" class="block py-2 hover:text-secondary">Study in Canada</a>
+                    <a href="https://hgectravel.com/study-in-germany/" class="block py-2 hover:text-secondary">Study in Germany</a>
+                    <a href="https://hgectravel.com/study-in-finland/" class="block py-2 hover:text-secondary">Study in Finland</a>
+                    <a href="https://hgectravel.com/study-in-sweeden/" class="block py-2 hover:text-secondary">Study in Sweden</a>
+                    <a href="https://hgectravel.com/study-in-australia/" class="block py-2 hover:text-secondary">Study in Australia</a>
+                    <a href="https://hgectravel.com/study-in-france/" class="block py-2 hover:text-secondary">Study in France</a>
+                    <a href="https://hgectravel.com/study-in-netherlands/" class="block py-2 hover:text-secondary">Study in Netherlands</a>
+                    <a href="https://hgectravel.com/study-in-cyprus/" class="block py-2 hover:text-secondary">Study in Cyprus</a>
+                </div>
+            </div>
+            <a href="https://hgectravel.com/contact/" class="block py-2 px-4 hover:bg-accent">Contact</a>
+            <a href="https://hgectravel.com/apply-now/" class="block py-2 px-4 bg-secondary text-white text-center rounded mt-2">Apply Now</a>
+            <button id="close-menu" class="absolute top-4 right-4 text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">About HGEC Travel</h1>
+            <p class="text-xl max-w-3xl mx-auto mb-8">Your trusted partner in educational consultancy and travel services</p>
+            <a href="#content" class="inline-block bg-secondary hover:bg-primary text-white px-8 py-3 rounded-full font-medium transition">Discover Our Story</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="content" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <img src="https://hgectravel.com/wp-content/uploads/2023/04/Study_Abroad.jpg" alt="Study Abroad" class="w-full h-auto rounded-xl shadow-lg">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold text-primary mb-6">ABOUT US</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        Welcome to our educational consultancy agency, where we provide comprehensive and personalized guidance to students looking to pursue their academic goals. Our team of experienced educational consultants is dedicated to helping students achieve their full potential and reach their academic aspirations.
+                    </p>
+                    <p class="text-gray-700 mb-8 leading-relaxed">
+                        At our consultancy agency, we believe that every student is unique, and we work closely with each individual to identify their strengths and weaknesses, as well as their interests and goals. By understanding each student's unique situation, we are able to provide tailored advice and guidance that is specifically designed to help them succeed.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://hgectravel.com/apply-now/" class="bg-secondary hover:bg-primary text-white px-6 py-3 rounded-full font-medium transition flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i> Apply Now
+                        </a>
+                        <a href="https://hgectravel.com/contact/" class="bg-white border-2 border-secondary text-secondary hover:bg-secondary hover:text-white px-6 py-3 rounded-full font-medium transition flex items-center">
+                            <i class="fas fa-envelope mr-2"></i> Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Services Highlights -->
+    <section class="py-16 bg-accent">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Our Core Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">We provide comprehensive services to ensure your educational journey abroad is seamless and successful</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-plane-departure text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">We Take You There</h3>
+                    <p class="text-gray-600 mb-4">Comprehensive travel arrangements to your dream study destination</p>
+                    <img src="https://hgectravel.com/wp-content/uploads/2023/04/f46f72c2-957d-4746-94d3-efe098507a1f-300x300.jpg" alt="Travel" class="w-full rounded-lg">
+                </div>
+                
+                <div class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-passport text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Visa Application & Processing</h3>
+                    <p class="text-gray-600 mb-4">Expert guidance through the complex visa application process</p>
+                    <img src="https://hgectravel.com/wp-content/uploads/2023/04/5a089fa2-e319-4cf9-9422-1c0958f182dc-300x300.jpg" alt="Visa" class="w-full rounded-lg">
+                </div>
+                
+                <div class="service-card bg-white p-8 rounded-xl shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Admission Processing</h3>
+                    <p class="text-gray-600 mb-4">Assistance with university applications and admission requirements</p>
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Admission" class="w-full rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Info -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold text-primary mb-6">HGEC Educational Consultancy Ltd</h2>
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        HGEC Educational Consultancy Ltd is one of the leading educational consultancy and travel agency companies in Nigeria. With several years of offering indelible services to our students and clients, ensuring they achieve their overseas education and travel abroad goal.
+                    </p>
+                    <div class="bg-primary text-white p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-4">Our Mission</h3>
+                        <p class="mb-4">To empower students with opportunities for global education through personalized guidance and comprehensive support services.</p>
+                        <h3 class="text-xl font-bold mb-4">Our Vision</h3>
+                        <p>To be the premier educational consultancy connecting Nigerian students with world-class educational opportunities worldwide.</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-100 p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold text-primary mb-6">Why Choose HGEC?</h3>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-800">Expert Guidance</h4>
+                                    <p class="text-gray-600">Our consultants have extensive knowledge of international education systems</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-800">Personalized Approach</h4>
+                                    <p class="text-gray-600">Tailored solutions based on your academic background and career goals</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-800">End-to-End Support</h4>
+                                    <p class="text-gray-600">From application to arrival, we're with you every step of the way</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-check text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-semibold text-gray-800">Strong Partnerships</h4>
+                                    <p class="text-gray-600">Collaborations with top universities and institutions worldwide</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">HGEC</h3>
+                    <p class="text-gray-400">
+                        Leading educational consultancy and travel agency helping students achieve their overseas education dreams.
+                    </p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Study Destinations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Admission Processing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Visa Processing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Travel Arrangement</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Accommodation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Airport Pickup</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Education Road, Lagos, Nigeria</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3"></i>
+                            <span>+234 123 456 7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>info@hgec.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 HGEC Educational Consultancy Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+ 
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/2348027116388" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg floating-btn z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+    
+    <a href="tel:+2348027116388" class="fixed bottom-24 right-6 bg-secondary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg floating-btn z-50">
+        <i class="fas fa-phone-alt text-xl"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
